@@ -21790,7 +21790,7 @@
 				console.log("UPDATED");
 
 				// Run the query for the address
-				helpers.runQuery(this.state.searchTerm).then(function (data) {
+				helper.runQuery(this.state.searchTerm).then(function (data) {
 					if (data != this.state.results) {
 						console.log("Address", data);
 
@@ -21799,11 +21799,11 @@
 						});
 
 						// After we've received the result... then post the search term to our history. 
-						helpers.postArticle(this.state.searchTerm).then(function (data) {
+						helper.postArticle(this.state.searchTerm).then(function (data) {
 							console.log("Updated!");
 
 							// After we've done the post... then get the updated history
-							helpers.getArticle().then(function (response) {
+							helper.getArticle().then(function (response) {
 								console.log("Current Article", response.data);
 								this.setState({
 									searchTerm: response.data
@@ -21819,7 +21819,7 @@
 		componentDidMount: function componentDidMount() {
 
 			// Get the latest history.
-			helpers.getArticle().then(function (response) {
+			helper.getArticle().then(function (response) {
 				if (response != this.state.result) {
 					console.log("History", response.data);
 
@@ -21841,14 +21841,14 @@
 					{ className: 'row' },
 					React.createElement(
 						'div',
-						{ 'class': 'jumbotron', style: 'background-color: #20315A; color: white;' },
+						{ className: 'jumbotron' },
 						React.createElement(
 							'h1',
-							{ 'class': 'text-center' },
+							{ className: 'text-center' },
 							React.createElement(
 								'strong',
 								null,
-								React.createElement('i', { 'class': 'fa fa-newspaper-o' }),
+								React.createElement('i', { className: 'fa fa-newspaper-o' }),
 								' New York Times Search'
 							)
 						)
@@ -21896,101 +21896,83 @@
 
 	    return React.createElement(
 	      "div",
-	      { "class": "container" },
+	      { className: "container" },
 	      React.createElement(
 	        "div",
-	        { "class": "row" },
+	        { className: "row" },
 	        React.createElement(
 	          "div",
-	          { "class": "panel panel-primary" },
+	          { className: "panel panel-primary" },
 	          React.createElement(
 	            "div",
-	            { "class": "panel-heading" },
+	            { className: "panel-heading" },
 	            React.createElement(
 	              "h3",
-	              { "class": "panel-title" },
+	              { className: "panel-title" },
 	              React.createElement(
 	                "strong",
 	                null,
-	                React.createElement("i", { "class": "fa  fa-list-alt" }),
+	                React.createElement("i", { className: "fa  fa-list-alt" }),
 	                "   Search Parameters"
 	              )
 	            )
 	          ),
 	          React.createElement(
 	            "div",
-	            { "class": "panel-body" },
+	            { className: "panel-body" },
 	            React.createElement(
 	              "form",
 	              { role: "form" },
 	              React.createElement(
 	                "div",
-	                { "class": "form-group" },
+	                { className: "form-group" },
 	                React.createElement(
 	                  "label",
 	                  { "for": "search" },
 	                  "Search Term:"
 	                ),
-	                React.createElement("input", { type: "text", "class": "form-control", id: "searchTerm" })
+	                React.createElement("input", { type: "text", className: "form-control", id: "searchTerm" })
 	              ),
 	              React.createElement(
 	                "div",
-	                { "class": "form-group" },
+	                { className: "form-group" },
 	                React.createElement(
 	                  "label",
 	                  { "for": "pwd" },
 	                  " Number of Records to Retrieve:"
 	                ),
-	                React.createElement(
-	                  "select",
-	                  { "class": "form-control", id: "numRecordsSelect" },
-	                  React.createElement(
-	                    "option",
-	                    { value: "1" },
-	                    "1"
-	                  ),
-	                  React.createElement(
-	                    "option",
-	                    { value: "5", selected: true },
-	                    "5"
-	                  ),
-	                  React.createElement(
-	                    "option",
-	                    { value: "10" },
-	                    "10"
-	                  )
-	                )
+	                React.createElement("select", { className: "form-control", id: "numRecordsSelect" })
 	              ),
 	              React.createElement(
 	                "div",
-	                { "class": "form-group" },
+	                { className: "form-group" },
 	                React.createElement(
 	                  "label",
 	                  { "for": "startYear" },
 	                  "Start Year (Optional):"
 	                ),
-	                React.createElement("input", { type: "text", "class": "form-control", id: "startYear" })
+	                React.createElement("input", { type: "text", className: "form-control", id: "startYear" })
 	              ),
 	              React.createElement(
 	                "div",
-	                { "class": "form-group" },
+	                { className: "form-group" },
 	                React.createElement(
 	                  "label",
 	                  { "for": "endYear" },
 	                  "End Year (Optional):"
 	                ),
-	                React.createElement("input", { type: "text", "class": "form-control", id: "endYear" })
+	                React.createElement("input", { type: "text", className: "form-control", id: "endYear" })
 	              ),
 	              React.createElement(
 	                "button",
-	                { type: "submit", "class": "btn btn-default", id: "runSearch" },
-	                React.createElement("i", { "class": "fa fa-search" }),
+	                { type: "submit", className: "btn btn-default", id: "runSearch" },
+	                React.createElement("i", { className: "fa fa-search" }),
 	                " Search"
 	              ),
 	              React.createElement(
 	                "button",
-	                { type: "button", "class": "btn btn-default", id: "clearAll" },
-	                React.createElement("i", { "class": "fa fa-trash" }),
+	                { type: "button", className: "btn btn-default", id: "clearAll" },
+	                React.createElement("i", { className: "fa fa-trash" }),
 	                " Clear Results"
 	              )
 	            )
@@ -22022,24 +22004,24 @@
 
 			return React.createElement(
 				"div",
-				{ "class": "row" },
+				{ className: "row" },
 				React.createElement(
 					"div",
-					{ "class": "col-sm-12" },
+					{ className: "col-sm-12" },
 					React.createElement("br", null),
 					React.createElement(
 						"div",
-						{ "class": "panel panel-primary" },
+						{ className: "panel panel-primary" },
 						React.createElement(
 							"div",
-							{ "class": "panel-heading" },
+							{ className: "panel-heading" },
 							React.createElement(
 								"h3",
-								{ "class": "panel-title" },
+								{ className: "panel-title" },
 								React.createElement(
 									"strong",
 									null,
-									React.createElement("i", { "class": "fa fa-table" }),
+									React.createElement("i", { className: "fa fa-table" }),
 									"   Top Articles"
 								)
 							)
@@ -22049,7 +22031,7 @@
 							null,
 							this.props.result
 						),
-						React.createElement("div", { "class": "panel-body", id: "wellSection" })
+						React.createElement("div", { classNameName: "panel-body", id: "wellSection" })
 					)
 				)
 			);
@@ -22076,12 +22058,12 @@
 	var articleCounter = 0;
 
 	// Helper Functions (in this case the only one is runQuery)
-	var helpers = {
+	var helper = {
 
 		// This function serves our purpose of running the query to geolocate. 
 		runQuery: function runQuery(numArticles, queryURL) {
 
-			var totalURL = queryURL + authKey;v;
+			var totalURL = queryURL + authKey;
 
 			$.ajax({ url: queryURL, method: "GET" }).done(function (NYTData) {
 
@@ -22128,7 +22110,7 @@
 	};
 
 	// We export the helpers function 
-	module.exports = helpers;
+	module.exports = helper;
 
 /***/ },
 /* 187 */

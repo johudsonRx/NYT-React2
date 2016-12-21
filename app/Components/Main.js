@@ -35,7 +35,7 @@ setTerm: function(term){
 			console.log("UPDATED");
 
 			// Run the query for the address
-			helpers.runQuery(this.state.searchTerm)
+			helper.runQuery(this.state.searchTerm)
 				.then(function(data){
 					if (data != this.state.results)
 					{
@@ -46,12 +46,12 @@ setTerm: function(term){
 						})
 
 						// After we've received the result... then post the search term to our history. 
-						helpers.postArticle(this.state.searchTerm)
+						helper.postArticle(this.state.searchTerm)
 							.then(function(data){
 								console.log("Updated!");
 
 								// After we've done the post... then get the updated history
-								helpers.getArticle()
+								helper.getArticle()
 									.then(function(response){
 										console.log("Current Article", response.data);
 											this.setState({
@@ -72,7 +72,7 @@ setTerm: function(term){
 	componentDidMount: function(){
 
 		// Get the latest history.
-		helpers.getArticle()
+		helper.getArticle()
 			.then(function(response){
 				if (response != this.state.result){
 					console.log ("History", response.data);
@@ -93,8 +93,8 @@ setTerm: function(term){
 
 				<div className="row">
 
-				  <div class="jumbotron" style="background-color: #20315A; color: white;">
-		<h1 class="text-center"><strong><i class="fa fa-newspaper-o"></i> New York Times Search</strong></h1>
+				  <div className="jumbotron">
+		<h1 className="text-center"><strong><i className="fa fa-newspaper-o"></i> New York Times Search</strong></h1>
 	              </div>
 
 	              <div className="col-md-6">

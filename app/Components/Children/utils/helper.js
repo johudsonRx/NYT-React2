@@ -11,14 +11,14 @@ var queryURLBase = "https://api.nytimes.com/svc/search/v2/articlesearch.json?api
 var articleCounter = 0;
 
 // Helper Functions (in this case the only one is runQuery)
-var helpers = {
+var helper = {
 
 	
 
 	// This function serves our purpose of running the query to geolocate. 
 	runQuery: function(numArticles, queryURL){
 
-   var totalURL = queryURL + authKey;v
+   var totalURL = queryURL + authKey;
 
 $.ajax({url: queryURL, method: "GET"}) 
 		.done(function(NYTData) {
@@ -70,4 +70,4 @@ $.ajax({url: queryURL, method: "GET"})
 
 
 // We export the helpers function 
-module.exports = helpers;
+module.exports = helper;

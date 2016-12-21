@@ -16,44 +16,41 @@ var Parameters = React.createClass({
 
 		return(
 
-		 <div class="container">
-          <div class="row">
-           <div class="panel panel-primary">
+		 <div className="container">
+          <div className="row">
+           <div className="panel panel-primary">
 
-             <div class="panel-heading">
+             <div className="panel-heading">
 
-              <h3 class="panel-title"><strong><i class="fa  fa-list-alt"></i>   Search Parameters</strong></h3>
+              <h3 className="panel-title"><strong><i className="fa  fa-list-alt"></i>   Search Parameters</strong></h3>
             
              </div>
-             <div class="panel-body">
+             <div className="panel-body">
  			   <form role="form">
-                 <div class="form-group">
+                 <div className="form-group">
                     <label for="search">Search Term:</label>
-                    <input type="text" class="form-control" id="searchTerm"></input>
+                    <input type="text" className="form-control" id="searchTerm"></input>
                  </div>
                 
-                 <div class="form-group">
+                 <div className="form-group">
                   <label for="pwd"> Number of Records to Retrieve:</label>
-                    <select class="form-control" id="numRecordsSelect">
-                     <option value="1">1</option>
-
-                     <option value="5" selected>5</option>
-                     <option value="10">10</option>
+                    <select className="form-control" id="numRecordsSelect">
+                     
                   </select>
                  </div>
 
-                 <div class="form-group">
+                 <div className="form-group">
 					    <label for="startYear">Start Year (Optional):</label>
-					    <input type="text" class="form-control" id="startYear"></input>
+					    <input type="text" className="form-control" id="startYear"></input>
 			     </div>
                 
-                 <div class="form-group">
+                 <div className="form-group">
 					    <label for="endYear">End Year (Optional):</label>
-					    <input type="text" class="form-control" id="endYear"></input>
+					    <input type="text" className="form-control" id="endYear"></input>
 				  </div>
              
-                <button type="submit" class="btn btn-default" id="runSearch"><i class="fa fa-search"></i> Search</button>
-  			    <button type="button" class="btn btn-default" id="clearAll"><i class="fa fa-trash"></i> Clear Results</button>
+                <button type="submit" className="btn btn-default" id="runSearch"><i className="fa fa-search"></i> Search</button>
+  			    <button type="button" className="btn btn-default" id="clearAll"><i className="fa fa-trash"></i> Clear Results</button>
                 
 
  			   </form>
