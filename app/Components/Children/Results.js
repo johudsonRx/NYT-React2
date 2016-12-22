@@ -24,7 +24,7 @@ render: function(){
                  <p>{this.props.result}</p>
               
 			
-				<div classNameName="panel-body" id="wellSection">
+				<div className="panel-body" id="wellSection">
                 
 
 				</div>

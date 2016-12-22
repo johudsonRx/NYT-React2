@@ -34,42 +34,40 @@ handleChange: function(event){
 	// Custom (developer created)
 	handleClick: function(){
 
+		event.preventDefault();
+
 		console.log("CLICK");
 		console.log(this.state.term);
 		
 		// Set the parent to have the search term
 		this.props.setTerm(this.state.term);
-
+        this.setState({term: ""});
 	},
-
-
-
-
 
 
 	render: function(){
 
 		return(
 
-		 <div class="container">
-          <div class="row">
-           <div class="panel panel-primary">
+		 <div className="container">
+          <div className="row">
+           <div className="panel panel-primary">
 
-             <div class="panel-heading">
+             <div className="panel-heading">
 
-              <h3 class="panel-title"><strong><i class="fa  fa-list-alt"></i>   Search Parameters</strong></h3>
+              <h3 className="panel-title"><strong><i className="fa  fa-list-alt"></i>   Search Parameters</strong></h3>
             
              </div>
-             <div class="panel-body">
+             <div className="panel-body">
  			   <form role="form">
-                 <div class="form-group">
-                    <label for="search">Search Term:</label>
-                    <input type="text" class="form-control" id="searchTerm" onChange= {this.handleChange} required/></input>
+                 <div className="form-group">
+                    <label htmlFor="search">Search Term:</label>
+                    <input type="text" value={this.state.term} className="form-control" id="searchTerm" onChange= {this.handleChange} required/></input>
                  </div>
        
              
-                <button type="submit" class="btn btn-default" id="runSearch"><i class="fa fa-search" onChange= {this.handleChange} required/></i> Search</button>
-  			    <button type="button" class="btn btn-default" id="clearAll"><i class="fa fa-trash"></i> Clear Results</button>
+                <button type="submit" className="btn btn-default" id="runSearch"><i className="fa fa-search" onChange= {this.handleChange} required/></i> Search</button>
+  			    <button type="button" className="btn btn-default" id="clearAll"><i className="fa fa-trash"></i> Clear Results</button>
                 
 
  			   </form>

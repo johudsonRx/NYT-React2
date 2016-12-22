@@ -21777,11 +21777,11 @@
 			};
 		},
 
-		setTerm: function setTerm(term) {
-			this.setState({
-				searchTerm: term
-			});
-		},
+		// setTerm: function(term){
+		// 		this.setState({
+		// 			searchTerm: term
+		// 		})
+		// 	},
 
 		// If the component changes (i.e. if a search is entered)... 
 		componentDidUpdate: function componentDidUpdate(prevProps, prevState) {
@@ -21799,36 +21799,45 @@
 						});
 
 						// After we've received the result... then post the search term to our history. 
-						helper.postArticle(this.state.searchTerm).then(function (data) {
-							console.log("Updated!");
+						// helper.postResults(this.state.searchTerm)
+						// 	.then(function(data){
+						// 		console.log("Updated!");
 
-							// After we've done the post... then get the updated history
-							helper.getArticle().then(function (response) {
-								console.log("Current Article", response.data);
-								this.setState({
-									searchTerm: response.data
-								});
-							}.bind(this));
-						}.bind(this));
+						// 		// After we've done the post... then get the updated history
+						// 		helper.getResults()
+						// 			.then(function(response){
+						// 				console.log("Current Article", response.data);
+						// 					this.setState({
+						// 						searchTerm: response.data
+						// 					})
+
+						// 			}.bind(this))
+
+						// 	}.bind(this)
+						// )
 					}
 				}.bind(this));
 			}
 		},
 
-		// The moment the page renders get the History
-		componentDidMount: function componentDidMount() {
-
-			// Get the latest history.
-			helper.getArticle().then(function (response) {
-				if (response != this.state.result) {
-					console.log("History", response.data);
-
-					this.setState({
-						result: response.data
-					});
-				}
-			}.bind(this));
+		setTerm: function setTerm(term) {
+			this.setState({ searchTerm: term });
 		},
+		// The moment the page renders get the History
+		// componentDidMount: function(){
+
+		// 	// Get the latest history.
+		// 	helper.getResults()
+		// 		.then(function(response){
+		// 			if (response != this.state.result){
+		// 				console.log ("History", response.data);
+
+		// 				this.setState({
+		// 					result: response.data
+		// 				})
+		// 			}
+		// 		}.bind(this))
+		// },
 
 		// Here we render the function
 		render: function render() {
@@ -21855,12 +21864,16 @@
 					),
 					React.createElement(
 						'div',
-						{ className: 'col-md-6' },
+						{ className: 'col-md-12' },
 						React.createElement(Parameters, { setState: this.setTerm })
-					),
+					)
+				),
+				React.createElement(
+					'div',
+					{ className: 'row' },
 					React.createElement(
 						'div',
-						{ className: 'col-md-6' },
+						{ className: 'col-md-12' },
 						React.createElement(Results, { result: this.state.results })
 					)
 				)
@@ -22031,7 +22044,7 @@
 							null,
 							this.props.result
 						),
-						React.createElement("div", { classNameName: "panel-body", id: "wellSection" })
+						React.createElement("div", { className: "panel-body", id: "wellSection" })
 					)
 				)
 			);
@@ -22051,59 +22064,21 @@
 	var axios = __webpack_require__(187);
 
 	// / This variable will be pre-programmed with our authentication key (the one we received when we registered)
-	var authKey = "b9f91d369ff59547cd47b931d8cbc56b:0:74623931";
+	var authKey = "6c1cfdae203248ad8b449476c2a0819e";
 
-	var queryURLBase = "https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=" + authKey + "&q=";
-
-	var articleCounter = 0;
-
-	// Helper Functions (in this case the only one is runQuery)
 	var helper = {
 
 		// This function serves our purpose of running the query to geolocate. 
-		runQuery: function runQuery(numArticles, queryURL) {
+		runQuery: function runQuery(term) {
 
-			var totalURL = queryURL + authKey;
+			console.log(term);
 
-			$.ajax({ url: queryURL, method: "GET" }).done(function (NYTData) {
+			var queryURL = "https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=" + authKey + "&q=" + term;
 
-				// Here we are logging the URL so we have access to it for troubleshooting
-				console.log("URL: " + queryURL);
-
-				// Here we then log the NYTData to console, where it will show up as an object.
-				console.log(NYTData);
-
-				// Loop through and provide the correct number of articles
-				// for (var i=0; i<numArticles; i++) {
-
-				//                     articleCounter++;      
-				//              }
-
-				return axios.get(totalURL).then(function (response) {
-
-					console.log(response);
-					return response.data.results[0].formatted;
-				});
-			});
-		},
-
-		// This function hits our own server to retrieve the record of query results
-		getArticle: function getArticle() {
-
-			return axios.get('/api').then(function (response) {
+			return axios.get(queryURL).then(function (response) {
 
 				console.log(response);
 				return response;
-			});
-		},
-
-		// This function posts new searches to our database.
-		postArticle: function postArticle(location) {
-
-			return axios.post('/api', { location: location }).then(function (results) {
-
-				console.log("Posted to MongoDB");
-				return results;
 			});
 		}
 

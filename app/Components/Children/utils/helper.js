@@ -3,69 +3,51 @@ var axios = require('axios');
 
 
 // / This variable will be pre-programmed with our authentication key (the one we received when we registered)
-var authKey = "b9f91d369ff59547cd47b931d8cbc56b:0:74623931";
+var authKey = "6c1cfdae203248ad8b449476c2a0819e"
 
 
-var queryURLBase = "https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=" + authKey + "&q=";
 
-var articleCounter = 0;
-
-// Helper Functions (in this case the only one is runQuery)
 var helper = {
 
-	
-
 	// This function serves our purpose of running the query to geolocate. 
-	runQuery: function(numArticles, queryURL){
+	runQuery: function(term){
+       
 
-   var totalURL = queryURL + authKey;
+       console.log(term);
 
-$.ajax({url: queryURL, method: "GET"}) 
-		.done(function(NYTData) {
-		
-		// Here we are logging the URL so we have access to it for troubleshooting
-		console.log("URL: " + queryURL);
+var queryURL = "https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=" + authKey + "&q=" + term;
 
-		// Here we then log the NYTData to console, where it will show up as an object.
-		console.log(NYTData);
 
-		// Loop through and provide the correct number of articles
-			// for (var i=0; i<numArticles; i++) {
-                
-   //                     articleCounter++;      
-   //              }
+   return axios.get(queryURL).then(function(response) {
 
-            return axios.get(totalURL)
-			.then(function(response){
+        console.log(response);
+        return response;
 
-				console.log(response);
-				return response.data.results[0].formatted;
-		     })
-		});
-	},
+	})
 
-	// This function hits our own server to retrieve the record of query results
-	getArticle: function(){
+},
 
-		return axios.get('/api')
-			.then(function(response){
+	// getResults: function(){
 
-				console.log(response);
-				return response;
-			});
-	},
+	// 	return axios.get('/api')
+	// 		.then(function(response){
 
-	// This function posts new searches to our database.
-	postArticle: function(location){
+	// 			console.log(response);
+	// 			return response;
+	// 		});
+	// },
 
-		return axios.post('/api', {location: location})
-			.then(function(results){
+ //   postResults: function(term) {
 
-				console.log("Posted to MongoDB");
-				return(results);
-			})
-	}
+ //      return axios.post('/api', {term: term})
+	// 		.then(function(results){
 
+	// 			console.log("Posted to MongoDB");
+	// 			return(results);
+	// 		})
+
+ //   },
+   
 }
 
 

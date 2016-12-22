@@ -22,11 +22,11 @@ getInitialState: function(){
 		}
 	},
 
-setTerm: function(term){
-		this.setState({
-			searchTerm: term
-		})
-	},
+// setTerm: function(term){
+// 		this.setState({
+// 			searchTerm: term
+// 		})
+// 	},
 	
 	// If the component changes (i.e. if a search is entered)... 
 	componentDidUpdate: function(prevProps, prevState){
@@ -46,43 +46,46 @@ setTerm: function(term){
 						})
 
 						// After we've received the result... then post the search term to our history. 
-						helper.postArticle(this.state.searchTerm)
-							.then(function(data){
-								console.log("Updated!");
+						// helper.postResults(this.state.searchTerm)
+						// 	.then(function(data){
+						// 		console.log("Updated!");
 
-								// After we've done the post... then get the updated history
-								helper.getArticle()
-									.then(function(response){
-										console.log("Current Article", response.data);
-											this.setState({
-												searchTerm: response.data
-											})
+						// 		// After we've done the post... then get the updated history
+						// 		helper.getResults()
+						// 			.then(function(response){
+						// 				console.log("Current Article", response.data);
+						// 					this.setState({
+						// 						searchTerm: response.data
+						// 					})
 										
-									}.bind(this))
+						// 			}.bind(this))
 							    
-							}.bind(this)
-						)
+						// 	}.bind(this)
+						// )
 					}
 				}.bind(this))
 				
 			}
 	},
 
+      setTerm: function(term) {
+      	this.setState({searchTerm: term});
+      },
 	// The moment the page renders get the History
-	componentDidMount: function(){
+	// componentDidMount: function(){
 
-		// Get the latest history.
-		helper.getArticle()
-			.then(function(response){
-				if (response != this.state.result){
-					console.log ("History", response.data);
+	// 	// Get the latest history.
+	// 	helper.getResults()
+	// 		.then(function(response){
+	// 			if (response != this.state.result){
+	// 				console.log ("History", response.data);
 
-					this.setState({
-						result: response.data
-					})
-				}
-			}.bind(this))
-	},
+	// 				this.setState({
+	// 					result: response.data
+	// 				})
+	// 			}
+	// 		}.bind(this))
+	// },
 
 	// Here we render the function
 	render: function(){
@@ -97,24 +100,24 @@ setTerm: function(term){
 		<h1 className="text-center"><strong><i className="fa fa-newspaper-o"></i> New York Times Search</strong></h1>
 	              </div>
 
-	              <div className="col-md-6">
+	              <div className="col-md-12">
 
 	              <Parameters setState={this.setTerm}/>
 
 	              </div>
+	            </div>
 
-	              <div className="col-md-6">
+ 				<div className="row">
+	              <div className="col-md-12">
 
 	              <Results result={this.state.results} />
+	              </div>
 
 	              </div>
 
 
 				</div>
-        
-				
-
-			</div>
+			
 		)
 	}
 });
