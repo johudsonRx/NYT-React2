@@ -21899,95 +21899,91 @@
 
 
 	  // Child has a state that follows the number of clicks
+	  // getInitialState: function(){
+	  //  return {
+	  //    number: 0
+	  //  }
+
+	  // Here we set a generic state associated with the text being searched for
+	  // React created
 	  getInitialState: function getInitialState() {
 	    return {
-	      number: 0
+	      term: ""
 	    };
+	  },
+
+	  handleChange: function handleChange(event) {
+
+	    // Here we create syntax to capture any change in text to the query terms (pre-search).
+	    // See this Stack Overflow answer for more details: 
+	    // http://stackoverflow.com/questions/21029999/react-js-identifying-different-inputs-with-one-onchange-handler
+	    var newState = {};
+	    newState[event.target.id] = event.target.value;
+	    this.setState(newState);
+	  },
+
+	  // When a user submits... 
+	  // Custom (developer created)
+	  handleSubmit: function handleSubmit() {
+
+	    event.preventDefault();
+
+	    console.log("CLICK");
+	    console.log(this.state.term);
+
+	    // Set the parent to have the search term
+	    this.props.setTerm(this.state.term);
+	    this.setState({ term: "" });
 	  },
 
 	  render: function render() {
 
 	    return React.createElement(
 	      "div",
-	      { className: "container" },
+	      { className: "panel panel-default" },
 	      React.createElement(
 	        "div",
-	        { className: "row" },
+	        { className: "panel-heading" },
 	        React.createElement(
-	          "div",
-	          { className: "panel panel-primary" },
+	          "h3",
+	          { className: "panel-title text-center" },
+	          "Query"
+	        )
+	      ),
+	      React.createElement(
+	        "div",
+	        { className: "panel-body text-center" },
+	        React.createElement(
+	          "form",
+	          { onSubmit: this.handleSubmit },
 	          React.createElement(
 	            "div",
-	            { className: "panel-heading" },
+	            { className: "form-group" },
 	            React.createElement(
-	              "h3",
-	              { className: "panel-title" },
+	              "h4",
+	              { className: "" },
 	              React.createElement(
 	                "strong",
 	                null,
-	                React.createElement("i", { className: "fa  fa-list-alt" }),
-	                "   Search Parameters"
+	                "Location"
 	              )
-	            )
-	          ),
-	          React.createElement(
-	            "div",
-	            { className: "panel-body" },
+	            ),
+	            React.createElement("input", {
+	              type: "text",
+	              value: this.state.term,
+	              className: "form-control text-center",
+	              id: "term",
+	              onChange: this.handleChange,
+	              required: true
+	            }),
+	            React.createElement("br", null),
 	            React.createElement(
-	              "form",
-	              { role: "form" },
-	              React.createElement(
-	                "div",
-	                { className: "form-group" },
-	                React.createElement(
-	                  "label",
-	                  { "for": "search" },
-	                  "Search Term:"
-	                ),
-	                React.createElement("input", { type: "text", className: "form-control", id: "searchTerm" })
-	              ),
-	              React.createElement(
-	                "div",
-	                { className: "form-group" },
-	                React.createElement(
-	                  "label",
-	                  { "for": "pwd" },
-	                  " Number of Records to Retrieve:"
-	                ),
-	                React.createElement("select", { className: "form-control", id: "numRecordsSelect" })
-	              ),
-	              React.createElement(
-	                "div",
-	                { className: "form-group" },
-	                React.createElement(
-	                  "label",
-	                  { "for": "startYear" },
-	                  "Start Year (Optional):"
-	                ),
-	                React.createElement("input", { type: "text", className: "form-control", id: "startYear" })
-	              ),
-	              React.createElement(
-	                "div",
-	                { className: "form-group" },
-	                React.createElement(
-	                  "label",
-	                  { "for": "endYear" },
-	                  "End Year (Optional):"
-	                ),
-	                React.createElement("input", { type: "text", className: "form-control", id: "endYear" })
-	              ),
-	              React.createElement(
-	                "button",
-	                { type: "submit", className: "btn btn-default", id: "runSearch" },
-	                React.createElement("i", { className: "fa fa-search" }),
-	                " Search"
-	              ),
-	              React.createElement(
-	                "button",
-	                { type: "button", className: "btn btn-default", id: "clearAll" },
-	                React.createElement("i", { className: "fa fa-trash" }),
-	                " Clear Results"
-	              )
+	              "button",
+	              {
+	                className: "btn btn-primary",
+	                type: "submit"
+	              },
+	              "Submit"
 	            )
 	          )
 	        )

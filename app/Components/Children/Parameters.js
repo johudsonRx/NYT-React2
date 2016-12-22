@@ -5,62 +5,90 @@ var React = require('react');
 // Create the Child Component
 var Parameters = React.createClass({
 
-	// Child has a state that follows the number of clicks
-	getInitialState: function(){
-		return {
-			number: 0
-		}
-	},
+  // Child has a state that follows the number of clicks
+  // getInitialState: function(){
+  //  return {
+  //    number: 0
+  //  }
 
-	render: function(){
+  // Here we set a generic state associated with the text being searched for
+  // React created
+  getInitialState: function(){
+    return {
+      term: ""
+    }
+  },
 
-		return(
+handleChange: function(event){
 
-		 <div className="container">
-          <div className="row">
-           <div className="panel panel-primary">
+      // Here we create syntax to capture any change in text to the query terms (pre-search).
+      // See this Stack Overflow answer for more details: 
+      // http://stackoverflow.com/questions/21029999/react-js-identifying-different-inputs-with-one-onchange-handler
+      var newState = {};
+      newState[event.target.id] = event.target.value;
+      this.setState(newState);
 
-             <div className="panel-heading">
+  },
 
-              <h3 className="panel-title"><strong><i className="fa  fa-list-alt"></i>   Search Parameters</strong></h3>
-            
-             </div>
-             <div className="panel-body">
- 			   <form role="form">
-                 <div className="form-group">
-                    <label for="search">Search Term:</label>
-                    <input type="text" className="form-control" id="searchTerm"></input>
-                 </div>
-                
-                 <div className="form-group">
-                  <label for="pwd"> Number of Records to Retrieve:</label>
-                    <select className="form-control" id="numRecordsSelect">
-                     
-                  </select>
-                 </div>
+// When a user submits... 
+  // Custom (developer created)
+  handleSubmit: function(){
 
-                 <div className="form-group">
-					    <label for="startYear">Start Year (Optional):</label>
-					    <input type="text" className="form-control" id="startYear"></input>
-			     </div>
-                
-                 <div className="form-group">
-					    <label for="endYear">End Year (Optional):</label>
-					    <input type="text" className="form-control" id="endYear"></input>
-				  </div>
-             
-                <button type="submit" className="btn btn-default" id="runSearch"><i className="fa fa-search"></i> Search</button>
-  			    <button type="button" className="btn btn-default" id="clearAll"><i className="fa fa-trash"></i> Clear Results</button>
-                
+    event.preventDefault();
 
- 			   </form>
+    console.log("CLICK");
+    console.log(this.state.term);
+    
+    // Set the parent to have the search term
+    this.props.setTerm(this.state.term);
+        this.setState({term: ""});
+  },
 
-             </div>
-           </div>
-          </div>
-         </div>
-		)
-	}
+
+
+
+  render: function(){
+
+    return(
+
+     <div className="panel panel-default">
+        <div className="panel-heading">
+          <h3 className="panel-title text-center">Query</h3>
+        </div>
+        <div className="panel-body text-center">
+
+          <form onSubmit={this.handleSubmit}>
+            <div className="form-group">
+              <h4 className="">
+                <strong>Location</strong>
+              </h4>
+
+              {/*
+                Note how each of the form elements has an id that matches the state.
+                This is not necessary but it is convenient.
+                Also note how each has an onChange event associated with our handleChange function.
+              */}
+              <input
+                type="text"
+                value={this.state.term}
+                className="form-control text-center"
+                id="term"
+                onChange={this.handleChange}
+                required
+              />
+              <br />
+              <button
+                className="btn btn-primary"
+                type="submit"
+              >
+                Submit
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    )
+  }
 });
 
 // Export the component back for use in other files

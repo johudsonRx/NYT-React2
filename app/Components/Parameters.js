@@ -49,33 +49,42 @@ handleChange: function(event){
 
 		return(
 
-		 <div className="container">
-          <div className="row">
-           <div className="panel panel-primary">
+		 <div className="panel panel-default">
+        <div className="panel-heading">
+          <h3 className="panel-title text-center">Query</h3>
+        </div>
+        <div className="panel-body text-center">
 
-             <div className="panel-heading">
+          <form onSubmit={this.handleSubmit}>
+            <div className="form-group">
+              <h4 className="">
+                <strong>Location</strong>
+              </h4>
 
-              <h3 className="panel-title"><strong><i className="fa  fa-list-alt"></i>   Search Parameters</strong></h3>
-            
-             </div>
-             <div className="panel-body">
- 			   <form role="form">
-                 <div className="form-group">
-                    <label htmlFor="search">Search Term:</label>
-                    <input type="text" value={this.state.term} className="form-control" id="searchTerm" onChange= {this.handleChange} required/></input>
-                 </div>
-       
-             
-                <button type="submit" className="btn btn-default" id="runSearch"><i className="fa fa-search" onChange= {this.handleChange} required/></i> Search</button>
-  			    <button type="button" className="btn btn-default" id="clearAll"><i className="fa fa-trash"></i> Clear Results</button>
-                
-
- 			   </form>
-
-             </div>
-           </div>
-          </div>
-         </div>
+              {/*
+                Note how each of the form elements has an id that matches the state.
+                This is not necessary but it is convenient.
+                Also note how each has an onChange event associated with our handleChange function.
+              */}
+              <input
+                type="text"
+                value={this.state.term}
+                className="form-control text-center"
+                id="term"
+                onChange={this.handleChange}
+                required
+              />
+              <br />
+              <button
+                className="btn btn-primary"
+                type="submit"
+              >
+                Submit
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
 		)
 	}
 });

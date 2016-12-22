@@ -18,7 +18,7 @@ getInitialState: function(){
 		return {
 			searchTerm: "",
 			results: "",
- 
+        
 		}
 	},
 
